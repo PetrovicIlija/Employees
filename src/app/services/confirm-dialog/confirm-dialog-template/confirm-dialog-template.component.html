@@ -1,0 +1,14 @@
+<h2>{{ 'Please confirm'}}</h2>
+<mat-dialog-content>
+    <p *ngFor="let t of text"> {{ t }} </p>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close tabindex="-1">
+    <span *ngIf="data.cancelButtonText; else defaultCancel">{{ data.cancelButtonText }}</span>
+    <ng-template #defaultCancel>{{ defaultCancelButtonText }}</ng-template>
+  </button>
+    <button mat-flat-button color="accent" (click)="confirm()">
+    <span *ngIf="data.confirmButtonText; else defaultConfirm">{{ data.confirmButtonText }}</span>
+    <ng-template #defaultConfirm>{{ defaultConfirmButtonText }}</ng-template>
+  </button>
+</mat-dialog-actions>

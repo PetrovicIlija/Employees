@@ -3,7 +3,7 @@
     <button mat-icon-button style="margin-left:15px;" (click)="loadEmployees()">
         <mat-icon>refresh</mat-icon>
     </button>
-        <button mat-raised-button color="accent" style="margin-left:30px;" *ngIf="isSearchButtonShown" (click)="searchEmployees()"> {{ 'Search' }} </button>
+        <button mat-raised-button color="accent" style="margin-left:30px;" *ngIf="isSearchButtonShown" (click)="filterAndSortEmployees()"> {{ 'Search' }} </button>
 </mat-toolbar>
 <div style="height:4px;">
         <mat-progress-bar mode="query" style="width:100%;" *ngIf="isLoading"></mat-progress-bar>
@@ -20,7 +20,7 @@
         <th mat-header-cell *matHeaderCellDef>
             <form>
                 <mat-form-field>
-                    <input matInput placeholder="{{ 'Search by first name' }}" name="first-name" type="text" [(ngModel)]="filter.firstName" (keyup)="searchSettingsChanged()" (keyup.enter)="searchEmployees()">
+                    <input matInput placeholder="{{ 'Search by first name' }}" name="first-name" type="text" [(ngModel)]="filter.firstName" (keyup)="searchSettingsChanged()" (keyup.enter)="filterAndSortEmployees()">
                 </mat-form-field>
             </form>
         </th>
@@ -35,7 +35,7 @@
         <th mat-header-cell *matHeaderCellDef>
             <form>
                 <mat-form-field>
-                    <input matInput placeholder="{{ 'Search by last name' }}" name="lastName" type="text" [(ngModel)]="filter.lastName" (keyup)="searchSettingsChanged()" (keyup.enter)="searchEmployees()">
+                    <input matInput placeholder="{{ 'Search by last name' }}" name="lastName" type="text" [(ngModel)]="filter.lastName" (keyup)="searchSettingsChanged()" (keyup.enter)="filterAndSortEmployees()">
                 </mat-form-field>
             </form>
         </th>
@@ -59,7 +59,7 @@
         <th mat-header-cell *matHeaderCellDef>
             <form>
                 <mat-form-field>
-                    <mat-select placeholder="{{ 'Search by job title' }}" name="jobTitle" [(ngModel)]="filter.jobTitle" (selectionChange)="searchSettingsChanged()" (keyup.enter)="searchEmployees()">
+                    <mat-select placeholder="{{ 'Search by job title' }}" name="jobTitle" [(ngModel)]="filter.jobTitle" (selectionChange)="searchSettingsChanged()" (keyup.enter)="filterAndSortEmployees()">
                         <mat-option *ngFor="let jobTitle of jobTitles" [value]="jobTitle"> {{ jobTitle }} </mat-option>
                     </mat-select>
                 </mat-form-field>

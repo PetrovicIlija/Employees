@@ -1,1 +1,38 @@
-<p>employee-form works!</p>
+<mat-toolbar class="mat-toolbar mat-toolbar-single-row">
+    {{ 'Create Employee' }}
+    <div style="margin-left: auto">
+        <button mat-icon-button style="margin-left:15px;" (click)="saveEmployee()">
+            <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button style="margin-left:15px;" (click)="reset()">
+            <mat-icon>cancel</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+<div style="height:4px;">
+    <mat-progress-bar mode="query" style="width:100%;" *ngIf="isLoading"></mat-progress-bar>
+</div>
+
+<form (ngSubmit)="saveEmployee()" #employeeForm="ngForm">
+    <mat-card>
+        <mat-card-content style="display: flex; flex-direction: column;">
+            <mat-form-field>
+                <input matInput placeholder="{{ 'First Name' }}" name="firstName" type="text" [(ngModel)]="employee.firstName" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="{{ 'Last Name' }}" name="lastName" type="text" [(ngModel)]="employee.lastName" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="{{ 'Date of Birth' }}" name="dateOfBirth" [(ngModel)]="employee.dateOfBirth" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="{{ 'Job Title' }}" name="jobTitle" type="text" [(ngModel)]="employee.jobTitle" required>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+</form>

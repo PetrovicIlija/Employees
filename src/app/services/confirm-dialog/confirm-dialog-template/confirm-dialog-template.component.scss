@@ -1,0 +1,13 @@
+h2 {
+    padding: 0;
+}
+
+mat-dialog-content {
+    line-height: 24px;
+}
+
+mat-dialog-actions {
+    button:first-child {
+        margin-left: auto;
+    }
+}

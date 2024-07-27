@@ -10,12 +10,14 @@ import { AppMaterialModule } from './app-material.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ConfirmDialogTemplateComponent } from './services/confirm-dialog/confirm-dialog-template/confirm-dialog-template.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesComponent,
-    EmployeeFormComponent
+    EmployeeFormComponent,
+    ConfirmDialogTemplateComponent,
   ],
   imports: [
     BrowserModule,

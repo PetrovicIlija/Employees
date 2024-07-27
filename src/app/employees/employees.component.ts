@@ -41,13 +41,13 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
     this.sort?.sortChange.subscribe(() => {
       if (this.paginator) {
         this.paginator.pageIndex = 0;
+        this.filterAndSortEmployees();
       }
-      this.loadEmployees();
     });
 
     this.paginator?.page.subscribe(() => {
       window.scroll(0, 0);
-      this.loadEmployees();
+      this.filterAndSortEmployees();
     });
   }
 
@@ -82,7 +82,7 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
     this.isSearchButtonShown = true;
   }
 
-  searchEmployees() {
+  filterAndSortEmployees() {
     this.isLoading = true;
     this.dataSource.data = this.dataSource.data.filter(employee => {
       if (this.filter.firstName && !employee.firstName?.includes(this.filter.firstName)) {
@@ -96,6 +96,28 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
       }
       return true;
     });
+    if (this.sort?.active && this.sort.direction) {
+      this.dataSource.data = this.dataSource.data.sort((a, b) => {
+        const isAsc = this.sort?.direction === 'asc';
+        switch (this.sort?.active) {
+          case 'first-name': return this.compare(a.firstName, b.firstName, isAsc);
+          case 'last-name': return this.compare(a.lastName, b.lastName, isAsc);
+          case 'date-of-birth': return this.compareDates(a.dateOfBirth, b.dateOfBirth, isAsc);
+          case 'job-title': return this.compare(a.jobTitle, b.jobTitle, isAsc);
+          default: return 0;
+        }
+      });
+    }
+    this.pagination.totalResults = this.dataSource.data.length;
+    this.isLoading = false;
+  }
+
+  compare(a: string | number | undefined, b: string | number | undefined, isAsc: boolean): number {
+    return (a === b ? 0 : (a && b && a < b ? -1 : 1)) * (isAsc ? 1 : -1);
+  }
+
+  compareDates(a: Date | undefined, b: Date | undefined, isAsc: boolean): number {
+    return (a === b ? 0 : (a && b && a < b ? -1 : 1)) * (isAsc ? 1 : -1);
   }
 }
 
