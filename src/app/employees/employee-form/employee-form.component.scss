@@ -1,0 +1,41 @@
+.create-employee-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.progress-bar-container {
+    height: 4px;
+    margin-bottom: 20px;
+}
+
+.employee-form mat-card {
+    margin-bottom: 20px;
+}
+
+.employee-form mat-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.button-container button {
+    min-width: 120px;
+    font-size: 16px;
+    padding: 8px 16px;
+}
+
+@media (max-width: 600px) {
+    .create-employee-container {
+        padding: 10px;
+    }
+
+    .button-container button {
+        width: 100%;
+    }
+}

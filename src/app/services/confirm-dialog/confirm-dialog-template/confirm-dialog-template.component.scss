@@ -1,13 +1,28 @@
-h2 {
-    padding: 0;
+:host {
+    display: block;
+    padding: 24px;
+    border-radius: 8px;
 }
 
-mat-dialog-content {
-    line-height: 24px;
+h2 {
+    text-align: center;
 }
 
 mat-dialog-actions {
-    button:first-child {
-        margin-left: auto;
-    }
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    min-width: 100px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+button:first-child {
+    margin-right: 12px;
+}
+
+button[mat-flat-button]:hover {
+    opacity: 0.9;
 }

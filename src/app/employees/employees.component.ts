@@ -18,6 +18,7 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
   public isLoading: boolean = false;
   public filter: EmployeeFilter = {};
   public jobTitles: string[] = [];
+  employees: Employee[] = [];
 
   dataSource!: MatTableDataSource<Employee>;
   pagination = {
@@ -55,6 +56,7 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     this.employeesService.getEmployees().subscribe({
       next: (employees) => {
+        this.employees = employees;
         this.dataSource = new MatTableDataSource<Employee>(employees);
         this.dataSource.sort = this.sort!;
         this.dataSource.paginator = this.paginator!;
@@ -64,6 +66,7 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
             this.jobTitles.push(employee.jobTitle);
           }
         });
+        this.filter = {};
         this.isSearchButtonShown = false;
         this.isLoading = false;
       },
@@ -84,7 +87,7 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
 
   filterAndSortEmployees() {
     this.isLoading = true;
-    this.dataSource.data = this.dataSource.data.filter(employee => {
+    this.dataSource.data = this.employees.filter(employee => {
       if (this.filter.firstName && !employee.firstName?.includes(this.filter.firstName)) {
         return false;
       }
@@ -109,6 +112,7 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
       });
     }
     this.pagination.totalResults = this.dataSource.data.length;
+    this.isSearchButtonShown = false;
     this.isLoading = false;
   }
 
@@ -118,6 +122,11 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
 
   compareDates(a: Date | undefined, b: Date | undefined, isAsc: boolean): number {
     return (a === b ? 0 : (a && b && a < b ? -1 : 1)) * (isAsc ? 1 : -1);
+  }
+
+  clearJobTitleFilter() {
+    this.filter.jobTitle = '';
+    this.searchSettingsChanged();
   }
 }
 
