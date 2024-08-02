@@ -32,6 +32,7 @@ export class EmployeeFormComponent {
       next: (confirmed) => {
         if (confirmed) {
           this.employee = new Employee();
+          this.form.resetForm();
         }
       }
     });

@@ -1,10 +1,10 @@
 <div class="employee-table-container">
-    <mat-toolbar>
-        <h1>{{ 'Employees' }}</h1>
-        <button mat-icon-button (click)="loadEmployees()">
+    <mat-toolbar class="rounded-toolbar">
+        <h1 style="margin: 0;">{{ 'Employees' }}</h1>
+        <button mat-icon-button class="toolbar-button" (click)="loadEmployees()">
             <mat-icon>refresh</mat-icon>
         </button>
-        <button mat-raised-button color="accent" *ngIf="isSearchButtonShown"
+        <button mat-raised-button color="accent" *ngIf="isSearchButtonShown" class="toolbar-button"
             (click)="filterAndSortEmployees()">
             {{ 'Search' }}
         </button>
